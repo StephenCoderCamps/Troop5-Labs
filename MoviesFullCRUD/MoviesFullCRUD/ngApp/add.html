@@ -1,0 +1,13 @@
+﻿<form ng-submit="vm.addMovie()">
+    <div>
+        <label>
+            title: <input ng-model="vm.movieToCreate.title" />
+        </label>
+    </div>
+    <div>
+        <label>
+            IMDB Link: <input ng-model="vm.movieToCreate.imdbLink" />
+        </label>
+    </div>
+    <input type="submit" value="Save" />
+</form>

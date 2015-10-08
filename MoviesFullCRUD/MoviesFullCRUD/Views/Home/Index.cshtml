@@ -1,0 +1,30 @@
+﻿@{ 
+    Layout = null;
+}
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="MoviesApp">
+<head>
+    <title></title>
+    <base href="/" />
+</head>
+<body ng-controller="AccountController as account">
+
+    <h1>Movies App</h1>
+
+    <a href="/login" ng-show="!account.isLoggedIn()">Login</a>
+    <a href="#" ng-click="account.logout()" ng-show="account.isLoggedIn()">Logout</a>
+
+    <hr />
+
+    <ng-view></ng-view>
+
+    <hr />
+    copyright &copy; by the company
+
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
+    <script src="~/Scripts/angular-resource.min.js"></script>
+    <script src="~/ngApp/app.js"></script>
+    <script src="~/ngApp/controllers.js"></script>
+    <script src="~/ngApp/services.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+﻿
+<h2>List</h2>
+
+Tax Amount: {{vm.taxAmount}}
+
+<table>
+    <tr ng-repeat="movie in vm.movies">
+        <td>
+            <a href="/edit/{{movie.id}}" ng-show="account.isLoggedIn()">edit</a>
+            <a href="/delete/{{movie.id}}" ng-show="account.isLoggedIn()">delete</a>
+        </td>
+        <td>{{movie.title}}</td>
+    </tr>
+</table>
+
+
+<a href="/add" ng-show="account.isLoggedIn()">Add Movie</a>
