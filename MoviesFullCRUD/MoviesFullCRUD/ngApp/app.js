@@ -48,3 +48,4 @@ var MoviesApp;
     });
     ;
 })(MoviesApp || (MoviesApp = {}));
+//# sourceMappingURL=app.js.map

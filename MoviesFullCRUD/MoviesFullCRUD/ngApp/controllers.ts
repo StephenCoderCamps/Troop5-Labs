@@ -1,19 +1,11 @@
 ﻿namespace MoviesApp.Controllers {
 
-    //const movieServiceUrl = 'http://MoviesWebAPIApp.azurewebsites.net/api/movies/:id';
-    //const authenticateURL = 'http://MoviesWebAPIApp.azurewebsites.net/Token';
-
 
     class MovieListController {
         public movies;
 
-        public taxAmount;
-
-        constructor(productService: MoviesApp.Services.ProductService, private $resource: ng.resource.IResourceService, movieServiceUrl: string) {
-            let MovieResource = $resource(movieServiceUrl);
-            this.movies = MovieResource.query();
-
-            this.taxAmount = productService.calculateTax(120000);
+        constructor(movieService: MoviesApp.Services.MovieService) {
+            this.movies = movieService.listMovies();
         }
     }
 
@@ -23,18 +15,14 @@
 
     class MovieAddController {
         public movieToCreate;
-        private MovieResource;
 
         addMovie() {
-            this.MovieResource.save(this.movieToCreate).$promise.then(() => {
+            this.movieService.save(this.movieToCreate).then(() => {
                 this.$location.path('/');
             });
         }
 
-        constructor(movieServiceUrl:string, private $resource: ng.resource.IResourceService, private $location: ng.ILocationService) {
-            this.MovieResource = $resource(movieServiceUrl);
-        }
-
+        constructor(private movieService: MoviesApp.Services.MovieService, private $location: ng.ILocationService) { }
     }
 
     angular.module('MoviesApp').controller('MovieAddController', MovieAddController);
@@ -42,23 +30,21 @@
 
     class MovieDeleteController {
         public movieToDelete;
-        private MovieResource;
+
 
         deleteMovie() {
-            this.MovieResource.delete({ id: this.$routeParams['id'] }).$promise.then(() => {
+            this.movieService.deleteMovie(this.$routeParams['id']).then(() => {
                 this.$location.path('/');
             });
         }
 
         constructor
             (
-            movieServiceUrl:string,
-            private $routeParams: ng.route.IRouteParamsService,
-            $resource: ng.resource.IResourceService,
-            private $location: ng.ILocationService
+            private movieService:MoviesApp.Services.MovieService,
+            private $location: ng.ILocationService,
+            private $routeParams: ng.route.IRouteParamsService
         ) {
-            this.MovieResource = $resource(movieServiceUrl);
-            this.movieToDelete = this.MovieResource.get({id:$routeParams['id']});
+            this.movieToDelete = this.movieService.getMovie($routeParams['id']);
         }
     }
 
@@ -70,23 +56,21 @@
 
     class MovieEditController {
         public movieToEdit;
-        private MovieResource;
+  
 
         editMovie() {
-            this.MovieResource.save(this.movieToEdit).$promise.then(() => {
+            this.movieService.save(this.movieToEdit).then(() => {
                 this.$location.path('/');
             });
         }
 
         constructor
             (
-            movieServiceUrl:string,
+            private movieService: MoviesApp.Services.MovieService,
             private $routeParams: ng.route.IRouteParamsService,
-            $resource: ng.resource.IResourceService,
             private $location: ng.ILocationService
             ) {
-            this.MovieResource = $resource(movieServiceUrl);
-            this.movieToEdit = this.MovieResource.get({ id: $routeParams['id'] });
+            this.movieToEdit = this.movieService.getMovie($routeParams['id']);
         }
     }
 
