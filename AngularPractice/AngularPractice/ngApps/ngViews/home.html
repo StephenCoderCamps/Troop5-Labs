@@ -1,0 +1,15 @@
+﻿<h1>This is the Home View</h1>
+
+
+
+<button ng-click="vm.getCars()">Get cars!</button>
+
+<div class="row">
+    <div class="col-md-4 thumbnail" ng-repeat="car in vm.cars">
+        <img ng-src="{{car.imageUrl}}" /> <br />
+        {{car.fullDescription}} <br /> 
+        {{car.price}}
+
+    </div>
+
+</div>
