@@ -1,0 +1,41 @@
+﻿@{ 
+
+    Layout = null;
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="MyApp">
+<head>
+    <title></title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+       
+        .carContainer {
+            width: 500px;
+            float:left;
+            margin: 10px;
+            border: solid 1px #cccccc;
+        }
+
+    </style>
+</head>
+<body ng-controller="HomeController as vm">
+
+    <div ng-repeat="car in vm.cars" class="carContainer" ng-click="vm.showModal(car.id)">
+
+        <h3>{{car.shortDescription}}</h3>
+
+        <img ng-src="{{car.imageUrl}}" height="300" />
+
+    </div>
+
+
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="~/ngApp/app.js"></script>
+    <script src="~/ngApp/controllers.js"></script>
+    <script src="~/ngApp/services.js"></script>
+
+</body>
+</html>
