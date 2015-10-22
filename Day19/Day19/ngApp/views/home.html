@@ -1,0 +1,12 @@
+﻿<ul>
+    <li ng-repeat="category in controller.categories">
+        {{category.name}}
+        <ul>
+            <li ng-repeat="movie in category.movies">
+                {{movie.title}}
+            </li>
+        </ul>
+
+    </li>
+</ul>
+
